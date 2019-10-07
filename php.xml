@@ -89,6 +89,12 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 				<Param name="[bool unique=false]"/>
 			</Overload>
 		</KeyWord>
+		<KeyWord name="add_shortcode" func="yes">
+			<Overload retVal="Void" descr="Add a custom [shortcode] users can use to call a function.">
+				<Param name="string tag"/>
+				<Param name="callback function_to_add"/>
+			</Overload>
+		</KeyWord>
 		<KeyWord name="antispambot" func="yes">
 			<Overload retVal="string" descr="Converts email addresses characters to HTML entities to block spam bots.">
 				<Param name="string email_address"/>
@@ -2083,6 +2089,12 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 			<Overload retVal="null" descr="Execute functions hooked on a specific action hook, specifying arguments in an array.">
 				<Param name="string tag"/>
 				<Param name="array arg"/>
+			</Overload>
+		</KeyWord>
+		<KeyWord name="do_shortcode" func="yes">
+			<Overload retVal="null" descr="Search content for shortcodes and filter shortcodes through their hooks.">
+				<Param name="string tag"/>
+				<Param name="[bool unique=false]"/>
 			</Overload>
 		</KeyWord>
 		<KeyWord name="dynamic_sidebar" func="yes">
@@ -4157,7 +4169,11 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 				<Param name="[int user_id"/>
 				<Param name="[bool deprecated]]"/>
 			</Overload>
-		</KeyWord>		
+		</KeyWord>
+		<KeyWord name="get_shortcode_regex()" func="yes">
+			<Overload retVal="mixed" descr="Returns regular expression used to search for shortcodes inside posts.">
+			</Overload>
+		</KeyWord>
 		<KeyWord name="glob" func="yes">
 			<Overload retVal="array|false">
 				<Param name="string pattern"/>
@@ -4612,6 +4628,13 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 		</KeyWord>
 		<KeyWord name="has_filter" func="yes">
 			<Overload retVal="int|bool" descr="Check if any filter has been registered for a hook.">
+				<Param name="string tag"/>
+				<Param name="[callback function_to_check=false]"/>
+			</Overload>
+		</KeyWord>
+		<KeyWord name="has_shortcode" func="yes">
+			<Overload retVal="string|bool" descr="Check if any filter has been registered for a hook.">
+				<Param name="string content"/>
 				<Param name="string tag"/>
 				<Param name="[callback function_to_check=false]"/>
 			</Overload>
@@ -9188,6 +9211,11 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 				<Param name="int item"/>
 			</Overload>
 		</KeyWord>
+		<KeyWord name="no_texturize_shortcodes" func="no">
+			<Overload retVal="array">
+				<Param name="array''"/>
+			</Overload>
+		</KeyWord>
 		<KeyWord name="nsapi_request_headers" func="yes">
 			<Overload retVal="array">
 				<Param name="void"/>
@@ -11740,6 +11768,15 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 				<Param name="string role"/>
 			</Overload>
 		</KeyWord>
+		<KeyWord name="remove_shortcode" func="yes">
+			<Overload retVal="null" descr="Removes hook for shortcode.">
+				<Param name="string tag"/>
+			</Overload>
+		</KeyWord>
+		<KeyWord name="remove_all_shortcodes" func="yes">
+			<Overload retVal="null" descr="Clears all shortcode hooks.">
+			</Overload>
+		</KeyWord>
 		<KeyWord name="rename" func="yes">
 			<Overload retVal="bool">
 				<Param name="string old_name"/>
@@ -12107,6 +12144,19 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 			<Overload retVal="bool">
 				<Param name="resource id"/>
 				<Param name="int variable_key"/>
+			</Overload>
+		</KeyWord>
+		<KeyWord name="shortcode_atts" func="yes">
+			<Overload retVal="array" descr="Combines user shortcode attributes with known attributes and fills in defaults when needed.">
+				<Param name="[array pairs=array()]"/>
+				<Param name="string atts()"/>
+				<Param name="string shortcode()|optional"/>
+			</Overload>
+		</KeyWord>
+		<KeyWord name="shortcode_exists" func="yes">
+			<Overload retVal="string|bool" descr="Checks whether a specific shortcode has been registered or not.">
+				<Param name="string atts()"/>
+				<Param name="bool {}"/>
 			</Overload>
 		</KeyWord>
 		<KeyWord name="shuffle" func="yes">
@@ -13133,6 +13183,11 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 			<Overload retVal="string">
 				<Param name="string str"/>
 				<Param name="[string allowable_tags]"/>
+			</Overload>
+		</KeyWord>
+		<KeyWord name="strip_shortcodes" func="yes">
+			<Overload retVal="string" descr="Deletes all shortcode tags from the given content.">
+				<Param name="string ( $content )"/>
 			</Overload>
 		</KeyWord>
 		<KeyWord name="stristr" func="yes">
@@ -14358,6 +14413,11 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
 				<Param name="string packet"/>
 			</Overload>
 		</KeyWord>
+		<KeyWord name="wp_audio_shortcode" func="yes">
+			<Overload retVal="array" descr="Implements the functionality of the Audio Shortcode for displaying (and playing) audio-files in a post."> 
+				<Param name="array attr"/>
+			</Overload>
+		</KeyWord>
 		<KeyWord name="wp_create_user" func="yes">
 			<Overload retVal="int" descr="A simpler way of inserting an user into the database."> 
 				<Param name="string username"/>
@@ -14419,6 +14479,11 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
     'blog_id'                 => $GLOBALS['blog_id'],
     'who'                     => null // string
 )"/>
+			</Overload>
+		</KeyWord>
+		<KeyWord name="wp_get_video_extensions" func="yes">
+			<Overload retVal="string" descr="Return a filtered list of WP-supported video formats.">
+				<Param name="null"/>
 			</Overload>
 		</KeyWord>
 		<KeyWord name="wp_insert_user" func="yes">
@@ -14592,7 +14657,12 @@ It's mixed with and based on PHP AutoComplete by Geoffray Warnants - http://www.
     'yim'            =>'',
 )"/>
 			</Overload>
-		</KeyWord>		
+		</KeyWord>
+		<KeyWord name="wp_video_shortcode" func="yes">
+			<Overload retVal="array" descr="Implements the functionality of the Audio Shortcode for displaying (and playing) audio-files in a post."> 
+				<Param name="$attr, $content = ''"/>
+			</Overload>
+		</KeyWord>
 		<KeyWord name="xmlrpc_decode" func="yes">
 			<Overload retVal="array">
 				<Param name="string xml"/>
